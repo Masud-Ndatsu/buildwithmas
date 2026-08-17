@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* Base — the site is a single dark surface by design */
+  --background: #0c0c0b;
+  --foreground: #f2efe9;
+
+  /* Backgrounds */
+  --bg-muted: #a5a096;
+  --bg-accent: #c98f3f;
+  --bg-subtle: #f7f7f7;
+  --bg-dark: #0c0c0b;
+  --bg-overlay: #000000a6; /* has alpha — good for modals/scrims */
+
+  /* Text */
+  --text-on-dark: #ffffff;
+  --text-cream: #f2efe9;
+  --text-sand: #ddd8ce;
+  --text-muted: #a5a096;
+  --text-accent: #c98f3f;
+  --text-secondary: #8d887e;
+  --text-tertiary: #757067;
+  --text-dark: #4f4b45;
+  --text-black: #000000;
+
+  /* Borders */
+  --border-light: #f2efe9;
+  --border-muted: #a5a096;
+  --border-dark: #23221f;
+  --border-darker: #1c1b19;
+
+  /* Layout rhythm — the two gutters every section shares */
+  --gutter-x: clamp(20px, 5vw, 72px);
+  --gutter-y: clamp(20px, 4vh, 44px);
+  --nav-reserve: min(112px, 14vw);
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-bg-muted: var(--bg-muted);
+  --color-bg-accent: var(--bg-accent);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-dark: var(--bg-dark);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-text-on-dark: var(--text-on-dark);
+  --color-text-cream: var(--text-cream);
+  --color-text-sand: var(--text-sand);
+  --color-text-muted: var(--text-muted);
+  --color-text-accent: var(--text-accent);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-dark: var(--text-dark);
+  --color-text-black: var(--text-black);
+
+  --color-border-light: var(--border-light);
+  --color-border-muted: var(--border-muted);
+  --color-border-dark: var(--border-dark);
+  --color-border-darker: var(--border-darker);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Helvetica Neue", Helvetica, sans-serif;
+}
+
+a:hover {
+  color: var(--text-accent);
+}
+
+:focus-visible {
+  outline: 1px solid var(--text-accent);
+  outline-offset: 6px;
+}
+
+/* ---- Design language primitives ---------------------------------------- */
+
+@layer components {
+  /* Uppercase monospace caption — the recurring label voice of the design. */
+  .eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Slightly larger monospace, used for indices and inline meta. */
+  .eyebrow-lg {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  /* A column in the horizontal canvas. */
+  .panel {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border-dark);
+    padding-inline: clamp(20px, 3vw, 52px);
+  }
+
+  /* Project panels get the full canvas width minus gutters and nav reserve. */
+  .panel-project {
+    width: min(
+      1000px,
+      calc(100vw - 2 * var(--gutter-x) - var(--nav-reserve) - 20px)
+    );
+    min-width: 280px;
+    padding-inline: clamp(20px, 3.4vw, 56px);
+  }
+}
+
+@layer utilities {
+  /* Scrollable regions keep their scrollbars out of the composition. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---- Motion ------------------------------------------------------------- */
+
+@keyframes layerIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes layerOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes canvasIn {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-layer-in {
+  animation: layerIn 340ms var(--ease-out) both;
+}
+.animate-layer-out {
+  animation: layerOut 240ms var(--ease-out) both;
+}
+.animate-rise-in {
+  animation: riseIn 380ms var(--ease-out) both;
+}
+.animate-canvas-in {
+  animation: canvasIn 420ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
 }

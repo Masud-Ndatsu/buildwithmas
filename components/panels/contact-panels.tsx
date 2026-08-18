@@ -3,11 +3,15 @@ import { profile } from "@/lib/content";
 const channels = [
   { label: "Email", text: profile.email, href: `mailto:${profile.email}` },
   { label: "GitHub", text: profile.github.label, href: profile.github.href },
-  {
-    label: "LinkedIn",
-    text: profile.linkedin.label,
-    href: profile.linkedin.href,
-  },
+  ...(profile.linkedin
+    ? [
+        {
+          label: "LinkedIn",
+          text: profile.linkedin.label,
+          href: profile.linkedin.href,
+        },
+      ]
+    : []),
 ];
 
 export function ContactPanels() {

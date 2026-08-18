@@ -1,5 +1,10 @@
 export type SectionKey = "projects" | "services" | "about" | "contact";
 
+export type Social = {
+  label: string;
+  href: string;
+};
+
 export type ProjectLink = {
   label: string;
   href: string;
@@ -57,10 +62,11 @@ export const profile = {
     label: "github.com/Masud-Ndatsu",
     href: "https://github.com/Masud-Ndatsu",
   },
-  linkedin: {
-    label: "in/masudndatsu",
-    href: "https://www.linkedin.com/in/masudndatsu",
-  },
+  /**
+   * The handle from the design file was not correct. Fill this in and the
+   * contact panel entry and the `sameAs` structured data both reappear.
+   */
+  linkedin: null as Social | null,
 };
 
 export const projects: Project[] = [

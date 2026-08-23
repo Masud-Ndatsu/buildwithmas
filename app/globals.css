@@ -108,6 +108,22 @@ a:hover {
     padding-inline: clamp(20px, 3vw, 52px);
   }
 
+  /*
+   * The portrait fills the visible canvas column on a phone, then returns to
+   * its narrow proportion once there is room for neighbouring panels.
+   */
+  .panel-portrait {
+    width: calc(100vw - 2 * var(--gutter-x) - var(--nav-reserve));
+    min-width: 240px;
+  }
+
+  @media (width >= 40rem) {
+    .panel-portrait {
+      width: min(30vw, 340px);
+      min-width: 220px;
+    }
+  }
+
   /* Project panels get the full canvas width minus gutters and nav reserve. */
   .panel-project {
     width: min(

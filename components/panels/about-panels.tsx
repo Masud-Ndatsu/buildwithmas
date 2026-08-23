@@ -4,16 +4,13 @@ import { MediaFrame } from "../media-frame";
 export function AboutPanels() {
   return (
     <>
-      <article
-        data-panel
-        className="panel w-[min(30vw,340px)] min-w-[220px]"
-      >
+      <article data-panel className="panel panel-portrait">
         <span className="eyebrow-lg text-text-accent">00 / Portrait</span>
         <MediaFrame
           src="/images/passport.png"
           alt={profile.name}
           placeholder="Portrait · 3:4"
-          sizes="(max-width: 640px) 70vw, 340px"
+          sizes="(max-width: 640px) 68vw, 360px"
           caption={`${profile.name} · Abuja, NG`}
           className="mt-[clamp(20px,4vh,48px)] flex-1"
         />
@@ -22,8 +19,8 @@ export function AboutPanels() {
       <article data-panel className="panel w-[min(46vw,600px)] min-w-[280px]">
         <span className="eyebrow-lg text-text-accent">01 / Profile</span>
         <p className="mt-[clamp(20px,4vh,48px)] text-[clamp(20px,2.1vw,34px)] leading-[1.35] font-light tracking-[-0.02em] text-pretty">
-          I&apos;m Mas&apos;ud, a backend-focused software engineer interested in
-          the infrastructure behind modern software systems.
+          I&apos;m Mas&apos;ud, a backend-focused software engineer interested
+          in the infrastructure behind modern software systems.
         </p>
         <p className="mt-6 max-w-[44ch] text-[14px] leading-[1.7] text-text-muted text-pretty">
           I work on the parts of a product that have to keep working: services,

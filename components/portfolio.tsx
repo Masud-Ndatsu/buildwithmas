@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Project, SectionKey } from "@/lib/content";
+import { sectionLayout, type Project, type SectionKey } from "@/lib/content";
 import { Hero } from "./hero";
 import { ProjectDetail } from "./project-detail";
 import { ProjectVisuals } from "./project-visuals";
@@ -62,8 +62,10 @@ export function Portfolio({ initialSection }: PortfolioProps) {
         else if (active) close();
         return;
       }
-      // Panel stepping would move the canvas under an open dialog.
+      // Panel stepping would move the canvas under an open dialog, and means
+      // nothing in a document section — leave the keys to scroll there.
       if (!active || modal) return;
+      if (sectionLayout[active] !== "canvas") return;
       if (event.key === "ArrowRight") {
         step(1);
         event.preventDefault();

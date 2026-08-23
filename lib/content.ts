@@ -54,8 +54,19 @@ export type Service = {
 export const sections: Record<SectionKey, { title: string; meta: string }> = {
   projects: { title: "Projects", meta: "04 Selected" },
   services: { title: "Services", meta: "04 Areas" },
-  about: { title: "About", meta: "05 Blocks" },
+  about: { title: "About", meta: "Profile" },
   contact: { title: "Contact", meta: "Available" },
+};
+
+/**
+ * How a section reads. The canvas suits sets of peer items; About is one
+ * continuous piece of biography, so it scrolls top to bottom instead.
+ */
+export const sectionLayout: Record<SectionKey, "canvas" | "document"> = {
+  projects: "canvas",
+  services: "canvas",
+  about: "document",
+  contact: "canvas",
 };
 
 export const sectionOrder: SectionKey[] = [

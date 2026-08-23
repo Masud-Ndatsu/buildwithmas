@@ -13,7 +13,7 @@ type SectionCanvasProps = {
   index: number;
   count: number;
   onStep: (direction: number) => void;
-  onOpenDetail: (project: Project) => void;
+  onOpenModal: (project: Project, view: "details" | "visuals") => void;
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -25,7 +25,7 @@ export function SectionCanvas({
   index,
   count,
   onStep,
-  onOpenDetail,
+  onOpenModal,
 }: SectionCanvasProps) {
   const { title, meta } = sections[active];
 
@@ -52,7 +52,7 @@ export function SectionCanvas({
       >
         <div className="flex h-full w-max items-stretch px-[var(--gutter-x)]">
           {active === "projects" ? (
-            <ProjectPanels onOpenDetail={onOpenDetail} />
+            <ProjectPanels onOpen={onOpenModal} />
           ) : null}
           {active === "services" ? <ServicePanels /> : null}
           {active === "about" ? <AboutPanels /> : null}

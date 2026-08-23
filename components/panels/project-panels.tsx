@@ -1,12 +1,12 @@
 import { projectDiagrams } from "@/components/diagrams";
 import { projects, type Project } from "@/lib/content";
-import { MediaFrame } from "../media-frame";
+import { ProjectStatus } from "../project-status";
 
 type ProjectPanelsProps = {
-  onOpenDetail: (project: Project) => void;
+  onOpen: (project: Project, view: "details" | "visuals") => void;
 };
 
-export function ProjectPanels({ onOpenDetail }: ProjectPanelsProps) {
+export function ProjectPanels({ onOpen }: ProjectPanelsProps) {
   return (
     <>
       {projects.map((project) => {
@@ -18,18 +18,22 @@ export function ProjectPanels({ onOpenDetail }: ProjectPanelsProps) {
             data-panel
             className="panel panel-project gap-[clamp(16px,2.4vh,30px)]"
           >
-            <div className="flex flex-none items-start gap-[clamp(14px,1.6vw,26px)]">
-              <span className="eyebrow-lg pt-[0.7em] text-text-accent">
-                {project.num}
-              </span>
-              <div>
-                <h3 className="text-[clamp(26px,3.6vw,60px)] leading-none font-light tracking-[-0.03em]">
-                  {project.name}
-                </h3>
-                <p className="mt-3.5 text-[clamp(13px,1.05vw,16px)] text-text-muted">
-                  {project.descriptor}
-                </p>
+            <div className="flex flex-none flex-wrap items-start justify-between gap-x-6 gap-y-3">
+              <div className="flex items-start gap-[clamp(14px,1.6vw,26px)]">
+                <span className="eyebrow-lg pt-[0.7em] text-text-accent">
+                  {project.num}
+                </span>
+                <div>
+                  <h3 className="text-[clamp(26px,3.6vw,60px)] leading-none font-light tracking-[-0.03em]">
+                    {project.name}
+                  </h3>
+                  <p className="mt-3.5 text-[clamp(13px,1.05vw,16px)] text-text-muted">
+                    {project.descriptor}
+                  </p>
+                </div>
               </div>
+
+              <ProjectStatus project={project} className="pt-[0.9em]" />
             </div>
 
             <div className="h-px flex-none bg-border-dark" />
@@ -62,17 +66,6 @@ export function ProjectPanels({ onOpenDetail }: ProjectPanelsProps) {
               </ul>
             </div>
 
-            {project.shot ? (
-              <MediaFrame
-                src={project.shot.src}
-                alt={project.shot.alt}
-                placeholder="Screenshot"
-                sizes="(max-width: 768px) 80vw, 320px"
-                ratio="16 / 10"
-                className="hidden flex-none lg:block lg:w-[260px]"
-              />
-            ) : null}
-
             <div className="flex flex-none flex-wrap items-end justify-between gap-x-[clamp(20px,2.4vw,40px)] gap-y-4 border-t border-border-dark pt-[clamp(12px,1.8vh,20px)]">
               <div>
                 <p className="eyebrow mb-2.5 text-text-tertiary">Stack</p>
@@ -88,13 +81,22 @@ export function ProjectPanels({ onOpenDetail }: ProjectPanelsProps) {
                 </ul>
               </div>
 
-              <button
-                type="button"
-                onClick={() => onOpenDetail(project)}
-                className="border border-border-dark px-4 py-3 font-mono text-[10px] tracking-[0.16em] text-text-sand uppercase transition-colors duration-[180ms] hover:border-bg-accent hover:text-text-accent"
-              >
-                Details →
-              </button>
+              <div className="flex flex-wrap gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => onOpen(project, "visuals")}
+                  className="border border-border-dark px-4 py-3 font-mono text-[10px] tracking-[0.16em] text-text-sand uppercase transition-colors duration-[180ms] hover:border-bg-accent hover:text-text-accent"
+                >
+                  Diagram →
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onOpen(project, "details")}
+                  className="border border-border-dark px-4 py-3 font-mono text-[10px] tracking-[0.16em] text-text-sand uppercase transition-colors duration-[180ms] hover:border-bg-accent hover:text-text-accent"
+                >
+                  Details →
+                </button>
+              </div>
             </div>
           </article>
         );

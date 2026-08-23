@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project, SectionKey } from "@/lib/content";
 import { Hero } from "./hero";
 import { ProjectDetail } from "./project-detail";
+import { ProjectVisuals } from "./project-visuals";
 import { SectionCanvas } from "./section-canvas";
 import { SiteNav } from "./site-nav";
 import { useHorizontalCanvas } from "./use-horizontal-canvas";
@@ -18,7 +19,8 @@ type PortfolioProps = {
 export function Portfolio({ initialSection }: PortfolioProps) {
   const [active, setActive] = useState<SectionKey | null>(initialSection);
   const [closing, setClosing] = useState(false);
-  const [detail, setDetail] = useState<Project | null>(null);
+  type Modal = { project: Project; view: "details" | "visuals" };
+  const [modal, setModal] = useState<Modal | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { ref, index, count, step } = useHorizontalCanvas(active);
@@ -35,14 +37,14 @@ export function Portfolio({ initialSection }: PortfolioProps) {
       if (closeTimer.current) clearTimeout(closeTimer.current);
       setActive(section);
       setClosing(false);
-      setDetail(null);
+      setModal(null);
       window.history.replaceState(null, "", `?section=${section}`);
     },
     [active, closing],
   );
 
   const close = useCallback(() => {
-    setDetail(null);
+    setModal(null);
     setClosing(true);
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => {
@@ -56,12 +58,12 @@ export function Portfolio({ initialSection }: PortfolioProps) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         // The dialog closes first, then the section.
-        if (detail) setDetail(null);
+        if (modal) setModal(null);
         else if (active) close();
         return;
       }
       // Panel stepping would move the canvas under an open dialog.
-      if (!active || detail) return;
+      if (!active || modal) return;
       if (event.key === "ArrowRight") {
         step(1);
         event.preventDefault();
@@ -73,7 +75,7 @@ export function Portfolio({ initialSection }: PortfolioProps) {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active, detail, close, step]);
+  }, [active, modal, close, step]);
 
   return (
     <main className="page-ground fixed inset-0 overflow-hidden">
@@ -88,12 +90,16 @@ export function Portfolio({ initialSection }: PortfolioProps) {
           index={index}
           count={count}
           onStep={step}
-          onOpenDetail={setDetail}
+          onOpenModal={(project, view) => setModal({ project, view })}
         />
       ) : null}
 
-      {detail ? (
-        <ProjectDetail project={detail} onClose={() => setDetail(null)} />
+      {modal?.view === "details" ? (
+        <ProjectDetail project={modal.project} onClose={() => setModal(null)} />
+      ) : null}
+
+      {modal?.view === "visuals" ? (
+        <ProjectVisuals project={modal.project} onClose={() => setModal(null)} />
       ) : null}
 
       {/* Keeps the rule marker and Esc affordance visible through the fade-out. */}

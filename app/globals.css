@@ -478,3 +478,24 @@ img {
       rgb(12 12 11 / 82%) 100%
     );
 }
+
+/* ---- Project status ----------------------------------------------------- */
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border: 1px solid var(--text-tertiary);
+  border-radius: 50%;
+}
+
+.status-dot.is-live {
+  border-color: var(--text-accent);
+  background: var(--text-accent);
+  animation: nodeBreathe 3.2s ease-in-out infinite;
+}
+
+/* A diagram shown at natural size so it can be panned when it does not fit. */
+.diagram-scroll .diagram {
+  height: auto;
+}

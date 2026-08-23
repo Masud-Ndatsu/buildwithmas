@@ -10,6 +10,14 @@ export type ProjectLink = {
   href: string;
 };
 
+export type ProjectStatus = "live" | "in-development" | "private";
+
+export const statusLabels: Record<ProjectStatus, string> = {
+  live: "Live",
+  "in-development": "In development",
+  private: "Private",
+};
+
 export type Project = {
   num: string;
   name: string;
@@ -18,6 +26,14 @@ export type Project = {
   solution: string;
   arch: string[];
   stack: string[];
+  /**
+   * Deployment state shown on the panel. Placeholder — every project is set
+   * to "in-development" so nothing claims to be reachable when it is not.
+   * Set the real value per project, and add `liveUrl` for the live ones.
+   */
+  status: ProjectStatus;
+  /** Public URL, linked from the status badge when the project is live. */
+  liveUrl?: string;
   /** Rendered in the panel footer. Omit until a real destination exists. */
   links?: ProjectLink[];
   /**
@@ -103,6 +119,7 @@ export const projects: Project[] = [
       "Cloudinary",
       "AWS",
     ],
+    status: "in-development",
   },
   {
     num: "02",
@@ -120,6 +137,7 @@ export const projects: Project[] = [
       "Idempotent transaction processing",
     ],
     stack: ["Node.js", "PostgreSQL", "Redis", "Stripe", "Cloud Infrastructure"],
+    status: "in-development",
   },
   {
     num: "03",
@@ -137,6 +155,7 @@ export const projects: Project[] = [
       "Product discovery feeds",
     ],
     stack: ["Node.js", "PostgreSQL", "Redis", "Cloud Infrastructure"],
+    status: "in-development",
   },
   {
     num: "04",
@@ -154,6 +173,7 @@ export const projects: Project[] = [
       "Distributed deployment topology",
     ],
     stack: ["NestJS", "PostgreSQL", "Redis", "Docker", "RabbitMQ"],
+    status: "in-development",
   },
 ];
 

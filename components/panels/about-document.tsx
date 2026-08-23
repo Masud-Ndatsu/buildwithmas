@@ -32,14 +32,12 @@ export function AboutDocument() {
         />
 
         <div>
-          <p className="text-[clamp(20px,2.1vw,32px)] leading-[1.35] font-light tracking-[-0.02em] text-pretty">
-            I&apos;m Mas&apos;ud, a backend-focused software engineer
-            interested in the infrastructure behind modern software systems.
+          {/* Display type balances its lines; body copy only needs orphan control. */}
+          <p className="text-[clamp(20px,2.1vw,32px)] leading-[1.35] font-light tracking-[-0.02em] text-balance">
+            {profile.bio.statement}
           </p>
-          <p className="mt-6 max-w-[52ch] text-[14px] leading-[1.7] text-text-muted text-pretty">
-            I work on the parts of a product that have to keep working:
-            services, data models, queues, deployments, and the operational
-            surface around them.
+          <p className="mt-7 max-w-[52ch] text-[14px] leading-[1.7] text-text-muted text-pretty">
+            {profile.bio.detail}
           </p>
         </div>
       </div>

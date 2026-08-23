@@ -82,6 +82,13 @@ export const profile = {
   headline: "I build systems that\nare designed to scale.",
   summary:
     "I design and build reliable backend systems, infrastructure, and distributed applications.",
+  /** About intro: the display statement and the paragraph supporting it. */
+  bio: {
+    statement:
+      "I'm Mas'ud, a backend-focused software engineer interested in the infrastructure behind modern software systems.",
+    detail:
+      "I work on the parts of a product that have to keep working: services, data models, queues, deployments, and the operational surface around them.",
+  },
   disciplines: [
     "Backend Engineering",
     "Distributed Systems",

@@ -30,7 +30,7 @@ export function SectionCanvas({
   return (
     <section
       aria-label={title}
-      className={`absolute inset-0 grid grid-rows-[auto_1fr_auto] bg-bg-dark pt-[var(--gutter-y)] pb-[clamp(18px,3vh,34px)] ${
+      className={`page-ground absolute inset-0 grid grid-rows-[auto_1fr_auto] pt-[var(--gutter-y)] pb-[clamp(18px,3vh,34px)] ${
         closing ? "animate-layer-out" : "animate-layer-in"
       }`}
     >

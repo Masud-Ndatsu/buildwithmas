@@ -109,6 +109,8 @@ export function useHorizontalCanvas(key: string | null) {
       if (!moved && Math.abs(delta) > 3) {
         moved = true;
         node.setPointerCapture(event.pointerId);
+        // Stop text/image selection from fighting the pan mid-gesture.
+        node.style.userSelect = "none";
       }
       if (moved) {
         node.scrollLeft = startLeft - delta;
@@ -118,6 +120,7 @@ export function useHorizontalCanvas(key: string | null) {
     const onUp = () => {
       down = false;
       node.style.cursor = "grab";
+      node.style.userSelect = "";
     };
 
     node.addEventListener("pointerdown", onDown);

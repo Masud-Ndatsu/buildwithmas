@@ -69,7 +69,7 @@ export function Portfolio({ initialSection }: PortfolioProps) {
   }, [active, close, step]);
 
   return (
-    <main className="fixed inset-0 overflow-hidden bg-bg-dark">
+    <main className="page-ground fixed inset-0 overflow-hidden">
       <Hero />
 
       {active ? (
@@ -86,6 +86,9 @@ export function Portfolio({ initialSection }: PortfolioProps) {
 
       {/* Keeps the rule marker and Esc affordance visible through the fade-out. */}
       <SiteNav active={active} onOpen={open} onClose={close} />
+
+      {/* Texture over everything; never intercepts the canvas drag. */}
+      <div aria-hidden className="grain" />
     </main>
   );
 }

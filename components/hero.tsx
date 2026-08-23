@@ -1,8 +1,11 @@
 import { profile } from "@/lib/content";
+import { HeroMotif } from "./hero-motif";
 
 export function Hero() {
   return (
     <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] px-[var(--gutter-x)] py-[var(--gutter-y)]">
+      <HeroMotif />
+
       <header className="flex items-start justify-between gap-8">
         <div>
           <h1 className="text-[clamp(15px,1.15vw,19px)] font-medium tracking-[0.14em] uppercase">

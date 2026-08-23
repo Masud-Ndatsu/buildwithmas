@@ -1,4 +1,5 @@
 import { services } from "@/lib/content";
+import { serviceGlyphs } from "../service-glyphs";
 
 export function ServicePanels() {
   return (
@@ -9,7 +10,10 @@ export function ServicePanels() {
           data-panel
           className="panel w-[min(40vw,520px)] min-w-[270px] px-[clamp(20px,2.6vw,44px)]"
         >
-          <span className="eyebrow-lg text-text-accent">{service.num}</span>
+          <div className="flex items-start justify-between gap-4">
+            <span className="eyebrow-lg text-text-accent">{service.num}</span>
+            {serviceGlyphs[service.num]}
+          </div>
 
           <h3 className="mt-[clamp(18px,3vh,40px)] max-w-[14ch] text-[clamp(24px,2.6vw,44px)] leading-[1.02] font-light tracking-[-0.025em]">
             {service.title}

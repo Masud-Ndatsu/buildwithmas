@@ -20,6 +20,12 @@ export type Project = {
   stack: string[];
   /** Rendered in the panel footer. Omit until a real destination exists. */
   links?: ProjectLink[];
+  /**
+   * Optional capture shown beside the architecture diagram. Drop the file in
+   * `public/` and point `src` at it; a missing file falls back to a labelled
+   * frame rather than breaking the layout.
+   */
+  shot?: { src: string; alt: string };
 };
 
 export type Service = {

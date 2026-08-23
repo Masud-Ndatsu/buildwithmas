@@ -1,5 +1,5 @@
 import { currentFocus, engineering, profile, technology } from "@/lib/content";
-import { Portrait } from "./portrait";
+import { MediaFrame } from "../media-frame";
 
 export function AboutPanels() {
   return (
@@ -9,12 +9,14 @@ export function AboutPanels() {
         className="panel w-[min(30vw,340px)] min-w-[220px]"
       >
         <span className="eyebrow-lg text-text-accent">00 / Portrait</span>
-        <div className="mt-[clamp(20px,4vh,48px)] flex min-h-0 flex-1 flex-col gap-3">
-          <Portrait />
-          <p className="font-mono text-[10px] tracking-[0.16em] text-text-dark uppercase">
-            {profile.name} · Abuja, NG
-          </p>
-        </div>
+        <MediaFrame
+          src="/portrait.jpg"
+          alt={profile.name}
+          placeholder="Portrait · 3:4"
+          sizes="(max-width: 640px) 70vw, 340px"
+          caption={`${profile.name} · Abuja, NG`}
+          className="mt-[clamp(20px,4vh,48px)] flex-1"
+        />
       </article>
 
       <article data-panel className="panel w-[min(46vw,600px)] min-w-[280px]">

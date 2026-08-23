@@ -192,3 +192,248 @@ a:hover {
     transition-duration: 1ms !important;
   }
 }
+
+/* ---- Media -------------------------------------------------------------- */
+
+/*
+ * The panel canvas is drag-panned with pointer events, so native image
+ * dragging has to be suppressed or it hijacks the gesture.
+ */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ---- Atmosphere --------------------------------------------------------- */
+
+/*
+ * Ground for the full-bleed surfaces. Two very low-opacity washes give the
+ * flat black some depth; the opaque base keeps the takeover layer able to
+ * cover the hero behind it.
+ */
+.page-ground {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(
+      120% 90% at 16% 52%,
+      rgb(201 143 63 / 5%),
+      transparent 58%
+    ),
+    radial-gradient(
+      90% 90% at 82% 14%,
+      rgb(242 239 233 / 3%),
+      transparent 55%
+    );
+}
+
+/*
+ * Static film grain across the whole viewport. Sits above everything for the
+ * texture to read, so it must never intercept pointer events.
+ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Diagrams ----------------------------------------------------------- */
+
+/*
+ * Architecture diagrams are inline SVG drawn in the same language as the rest
+ * of the page: hairline rules, mono labels, accent reserved for the primary
+ * data path.
+ */
+.diagram {
+  display: block;
+  width: 100%;
+  /* The wrapper supplies a definite height and `preserveAspectRatio` scales
+     the drawing to fit inside it, so a diagram can never overflow the panel. */
+  height: 100%;
+  overflow: visible;
+}
+
+.diagram text {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--text-muted);
+}
+
+.diagram text.is-strong {
+  fill: var(--text-sand);
+}
+
+.diagram text.is-accent {
+  fill: var(--text-accent);
+}
+
+.diagram .node {
+  fill: none;
+  stroke: var(--border-dark);
+  stroke-width: 1;
+}
+
+.diagram .node.is-accent {
+  stroke: var(--text-accent);
+}
+
+.diagram .edge {
+  fill: none;
+  stroke: var(--border-dark);
+  stroke-width: 1;
+}
+
+.diagram .edge.is-accent {
+  stroke: var(--text-accent);
+  opacity: 0.45;
+}
+
+.diagram .edge.is-dashed {
+  stroke-dasharray: 3 3;
+}
+
+.diagram .lane {
+  fill: none;
+  stroke: var(--border-darker);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+/* ---- Service glyphs ----------------------------------------------------- */
+
+.glyph {
+  width: clamp(34px, 3vw, 44px);
+  height: clamp(34px, 3vw, 44px);
+  flex: none;
+}
+
+.glyph [data-stroke] {
+  fill: none;
+  stroke: var(--text-tertiary);
+  stroke-width: 1;
+}
+
+.glyph [data-accent] {
+  fill: none;
+  stroke: var(--text-accent);
+  stroke-width: 1;
+}
+
+/* ---- Hero motif --------------------------------------------------------- */
+
+/*
+ * Ambient node/edge constellation in the hero's negative space. Decorative
+ * only: aria-hidden, never interactive, and kept far enough back that the
+ * headline stays the focus.
+ */
+.hero-motif {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 76vh;
+}
+
+.hero-motif .m-edge {
+  fill: none;
+  stroke: var(--border-dark);
+  stroke-width: 1;
+}
+
+.hero-motif .m-edge.is-accent {
+  stroke: var(--text-accent);
+}
+
+.hero-motif .m-node {
+  fill: var(--bg-dark);
+  stroke: var(--border-muted);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.hero-motif .m-node.is-accent {
+  stroke: var(--text-accent);
+  opacity: 0.85;
+}
+
+.hero-motif .m-ring {
+  fill: none;
+  stroke: var(--border-darker);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+@keyframes motifPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.hero-motif .m-pulse {
+  animation: motifPulse 5s ease-in-out infinite;
+}
+
+/* ---- Diagram + motif motion --------------------------------------------- */
+
+/*
+ * Packets travelling the primary data path. Paths declare pathLength="100"
+ * so one set of dash values works for every edge regardless of its real
+ * length. The global reduced-motion rule collapses these to 1ms.
+ */
+@keyframes edgeFlow {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.diagram .edge-flow,
+.hero-motif .m-flow {
+  fill: none;
+  stroke: var(--text-accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 9 91;
+  animation: edgeFlow 2.6s linear infinite;
+}
+
+.hero-motif .m-flow {
+  stroke-width: 2;
+  stroke-dasharray: 6 94;
+  animation-duration: 4.2s;
+}
+
+.hero-motif .m-edge.is-accent {
+  opacity: 0.18;
+}
+
+@keyframes nodeBreathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.diagram .node.is-accent {
+  animation: nodeBreathe 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram .edge-flow,
+  .hero-motif .m-flow {
+    display: none;
+  }
+}
+

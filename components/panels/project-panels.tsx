@@ -1,13 +1,16 @@
 import { projectDiagrams } from "@/components/diagrams";
-import { projects } from "@/lib/content";
+import { projects, type Project } from "@/lib/content";
 import { MediaFrame } from "../media-frame";
 
-export function ProjectPanels() {
+type ProjectPanelsProps = {
+  onOpenDetail: (project: Project) => void;
+};
+
+export function ProjectPanels({ onOpenDetail }: ProjectPanelsProps) {
   return (
     <>
       {projects.map((project) => {
         const SystemDiagram = projectDiagrams[project.num];
-        const hasVisual = Boolean(SystemDiagram || project.shot);
 
         return (
           <article
@@ -15,7 +18,7 @@ export function ProjectPanels() {
             data-panel
             className="panel panel-project gap-[clamp(16px,2.4vh,30px)]"
           >
-            <div className="flex items-start gap-[clamp(14px,1.6vw,26px)]">
+            <div className="flex flex-none items-start gap-[clamp(14px,1.6vw,26px)]">
               <span className="eyebrow-lg pt-[0.7em] text-text-accent">
                 {project.num}
               </span>
@@ -29,68 +32,46 @@ export function ProjectPanels() {
               </div>
             </div>
 
-            <div className="h-px bg-border-dark" />
+            <div className="h-px flex-none bg-border-dark" />
 
-            <div className="no-scrollbar flex min-h-0 flex-1 flex-col gap-[clamp(16px,2.4vh,30px)] overflow-y-auto pb-1">
-              <div className="flex flex-none flex-wrap gap-[clamp(18px,2.4vw,44px)]">
-                <div className="flex-[1_1_250px] min-w-[210px]">
-                  <p className="eyebrow mb-3.5 text-text-tertiary">Overview</p>
-                  <p className="mb-3 text-[14px] leading-[1.7] text-text-sand text-pretty">
-                    {project.problem}
-                  </p>
-                  <p className="text-[14px] leading-[1.7] text-text-muted text-pretty">
-                    {project.solution}
-                  </p>
-                </div>
-
-                <div className="flex-[1_1_210px] min-w-[190px]">
-                  <p className="eyebrow mb-3.5 text-text-tertiary">
-                    Architecture
-                  </p>
-                  <ul className="flex flex-col gap-2.5">
-                    {project.arch.map((item) => (
-                      <li
-                        key={item}
-                        className="border-t border-border-darker pt-2.5 text-[13px] leading-[1.5] text-text-sand"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            {/*
+              The system drawing is the panel. Its full write-up lives in the
+              details dialog so the visual is not competing with body copy.
+            */}
+            {SystemDiagram ? (
+              <div className="hidden min-h-0 flex-1 md:block">
+                <SystemDiagram />
               </div>
+            ) : null}
 
-              {/*
-                The diagram takes the band of empty space below the text
-                columns. It restates the `arch` list above rather than adding
-                new claims, so the list stays as the text equivalent.
-              */}
-              {hasVisual ? (
-                <div className="flex flex-wrap items-start gap-[clamp(18px,2.4vw,44px)]">
-                  {SystemDiagram ? (
-                    <div className="hidden min-w-[260px] flex-[2_1_340px] lg:block">
-                      <p className="eyebrow mb-3.5 text-text-tertiary">System</p>
-                      {/* Hidden where it would scale below legibility; the
-                          Architecture list above is the text equivalent. */}
-                      <div className="hidden h-[clamp(132px,19vh,196px)] lg:block">
-                        <SystemDiagram />
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {project.shot ? (
-                    <MediaFrame
-                      src={project.shot.src}
-                      alt={project.shot.alt}
-                      placeholder="Screenshot"
-                      sizes="(max-width: 640px) 80vw, 320px"
-                      ratio="16 / 10"
-                      className="min-w-[220px] flex-[1_1_260px] self-start"
-                    />
-                  ) : null}
-                </div>
-              ) : null}
+            {/*
+              A diagram scaled to a phone-width panel is unreadable, so small
+              screens get the architecture list in its place.
+            */}
+            <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto md:hidden">
+              <p className="eyebrow mb-3.5 text-text-tertiary">Architecture</p>
+              <ul className="flex flex-col gap-2.5">
+                {project.arch.map((item) => (
+                  <li
+                    key={item}
+                    className="border-t border-border-darker pt-2.5 text-[13px] leading-[1.5] text-text-sand"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
+
+            {project.shot ? (
+              <MediaFrame
+                src={project.shot.src}
+                alt={project.shot.alt}
+                placeholder="Screenshot"
+                sizes="(max-width: 768px) 80vw, 320px"
+                ratio="16 / 10"
+                className="hidden flex-none lg:block lg:w-[260px]"
+              />
+            ) : null}
 
             <div className="flex flex-none flex-wrap items-end justify-between gap-x-[clamp(20px,2.4vw,40px)] gap-y-4 border-t border-border-dark pt-[clamp(12px,1.8vh,20px)]">
               <div>
@@ -107,20 +88,13 @@ export function ProjectPanels() {
                 </ul>
               </div>
 
-              {project.links?.length ? (
-                <div className="flex gap-[clamp(14px,1.6vw,26px)] font-mono text-[10px] tracking-[0.16em] uppercase">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {link.label} →
-                    </a>
-                  ))}
-                </div>
-              ) : null}
+              <button
+                type="button"
+                onClick={() => onOpenDetail(project)}
+                className="border border-border-dark px-4 py-3 font-mono text-[10px] tracking-[0.16em] text-text-sand uppercase transition-colors duration-[180ms] hover:border-bg-accent hover:text-text-accent"
+              >
+                Details →
+              </button>
             </div>
           </article>
         );

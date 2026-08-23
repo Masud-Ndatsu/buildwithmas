@@ -1,6 +1,6 @@
 "use client";
 
-import { sections, type SectionKey } from "@/lib/content";
+import { sections, type Project, type SectionKey } from "@/lib/content";
 import { AboutPanels } from "./panels/about-panels";
 import { ContactPanels } from "./panels/contact-panels";
 import { ProjectPanels } from "./panels/project-panels";
@@ -13,6 +13,7 @@ type SectionCanvasProps = {
   index: number;
   count: number;
   onStep: (direction: number) => void;
+  onOpenDetail: (project: Project) => void;
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -24,6 +25,7 @@ export function SectionCanvas({
   index,
   count,
   onStep,
+  onOpenDetail,
 }: SectionCanvasProps) {
   const { title, meta } = sections[active];
 
@@ -49,7 +51,9 @@ export function SectionCanvas({
         className="no-scrollbar animate-canvas-in mt-[clamp(24px,4vh,52px)] mr-[calc(var(--gutter-x)+var(--nav-reserve))] cursor-grab overflow-x-auto overflow-y-hidden"
       >
         <div className="flex h-full w-max items-stretch px-[var(--gutter-x)]">
-          {active === "projects" ? <ProjectPanels /> : null}
+          {active === "projects" ? (
+            <ProjectPanels onOpenDetail={onOpenDetail} />
+          ) : null}
           {active === "services" ? <ServicePanels /> : null}
           {active === "about" ? <AboutPanels /> : null}
           {active === "contact" ? <ContactPanels /> : null}

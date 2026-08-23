@@ -10,7 +10,7 @@ export function AboutPanels() {
       >
         <span className="eyebrow-lg text-text-accent">00 / Portrait</span>
         <MediaFrame
-          src="/portrait.jpg"
+          src="/images/passport.png"
           alt={profile.name}
           placeholder="Portrait · 3:4"
           sizes="(max-width: 640px) 70vw, 340px"

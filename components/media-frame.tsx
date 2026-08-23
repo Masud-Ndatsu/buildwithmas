@@ -57,7 +57,7 @@ export function MediaFrame({
             fill
             sizes={sizes}
             draggable={false}
-            className="object-cover grayscale-[0.85] contrast-[1.05] brightness-[0.95]"
+            className="object-cover grayscale-[0.9] contrast-[1.08] brightness-[0.8]"
             onError={() => setUnavailable(true)}
           />
         )}

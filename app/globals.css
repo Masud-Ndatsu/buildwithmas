@@ -453,3 +453,28 @@ img {
   }
 }
 
+
+/* ---- Hero backdrop ------------------------------------------------------ */
+
+/*
+ * Scrim over the hero portrait. The horizontal ramp protects the headline on
+ * the left; the vertical one settles the photo into the masthead and footer.
+ */
+.hero-scrim {
+  background:
+    linear-gradient(
+      90deg,
+      rgb(12 12 11 / 99%) 0%,
+      rgb(12 12 11 / 97%) 62%,
+      rgb(12 12 11 / 78%) 74%,
+      rgb(12 12 11 / 30%) 90%,
+      rgb(12 12 11 / 18%) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(12 12 11 / 52%) 0%,
+      rgb(12 12 11 / 8%) 26%,
+      rgb(12 12 11 / 14%) 62%,
+      rgb(12 12 11 / 82%) 100%
+    );
+}

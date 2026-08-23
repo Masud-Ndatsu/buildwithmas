@@ -1,12 +1,14 @@
 import { profile } from "@/lib/content";
+import { HeroBackdrop } from "./hero-backdrop";
 import { HeroMotif } from "./hero-motif";
 
 export function Hero() {
   return (
     <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] px-[var(--gutter-x)] py-[var(--gutter-y)]">
+      <HeroBackdrop />
       <HeroMotif />
 
-      <header className="flex items-start justify-between gap-8">
+      <header className="relative flex items-start justify-between gap-8">
         <div>
           <h1 className="text-[clamp(15px,1.15vw,19px)] font-medium tracking-[0.14em] uppercase">
             {profile.name}
@@ -19,7 +21,7 @@ export function Hero() {
         </div>
       </header>
 
-      <div className="flex flex-col justify-center pr-[22vw]">
+      <div className="relative flex flex-col justify-center pr-[22vw]">
         <h2 className="text-[clamp(38px,7.2vw,124px)] leading-[0.94] font-light tracking-[-0.035em] text-balance">
           I build systems that
           <br />
@@ -30,7 +32,7 @@ export function Hero() {
         </p>
       </div>
 
-      <footer className="flex flex-wrap items-end justify-between gap-8">
+      <footer className="relative flex flex-wrap items-end justify-between gap-8">
         <ul className="flex flex-wrap gap-x-[clamp(16px,2.4vw,40px)] gap-y-0 font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">
           {profile.disciplines.map((discipline) => (
             <li key={discipline}>{discipline}</li>

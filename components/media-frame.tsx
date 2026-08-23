@@ -13,6 +13,8 @@ type MediaFrameProps = {
   ratio?: string;
   /** Mono caption rendered beneath the frame. */
   caption?: string;
+  /** Preload — set this on an above-the-fold image so it can serve as LCP. */
+  priority?: boolean;
   className?: string;
 };
 
@@ -34,6 +36,7 @@ export function MediaFrame({
   sizes,
   ratio,
   caption,
+  priority,
   className = "",
 }: MediaFrameProps) {
   const [unavailable, setUnavailable] = useState(false);
@@ -56,6 +59,7 @@ export function MediaFrame({
             alt={alt}
             fill
             sizes={sizes}
+            priority={priority}
             draggable={false}
             className="object-cover grayscale-[0.9] contrast-[1.08] brightness-[0.8]"
             onError={() => setUnavailable(true)}

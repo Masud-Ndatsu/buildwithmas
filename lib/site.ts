@@ -5,7 +5,7 @@
  * deployment) — it must be an absolute origin with no trailing slash.
  */
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://buildwithmas.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://masudndatsu.com"
 ).replace(/\/+$/, "");
 
 export const siteName = "Mas'ud Ndatsu";

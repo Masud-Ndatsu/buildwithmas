@@ -2,7 +2,7 @@ import { profile } from "@/lib/content";
 import { HeroBackdrop } from "./hero-backdrop";
 import { HeroMotif } from "./hero-motif";
 
-export function Hero() {
+export function Hero({ onOpenProjects }: { onOpenProjects: () => void }) {
   return (
     <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] px-[var(--gutter-x)] py-[var(--gutter-y)]">
       <HeroBackdrop />
@@ -30,6 +30,14 @@ export function Hero() {
         <p className="mt-[clamp(24px,3.4vh,44px)] max-w-[46ch] text-[clamp(14px,1.15vw,17px)] leading-[1.65] text-text-muted text-pretty">
           {profile.summary}
         </p>
+
+        <button
+          type="button"
+          onClick={onOpenProjects}
+          className="mt-[clamp(28px,4vh,48px)] w-fit border border-border-dark px-5 py-3.5 font-mono text-[10px] tracking-[0.16em] text-text-sand uppercase transition-colors duration-[180ms] hover:border-bg-accent hover:text-text-accent"
+        >
+          View projects →
+        </button>
       </div>
 
       <footer className="relative flex flex-wrap items-end justify-between gap-8">

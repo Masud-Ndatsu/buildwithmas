@@ -81,7 +81,7 @@ export function Portfolio({ initialSection }: PortfolioProps) {
 
   return (
     <main className="page-ground fixed inset-0 overflow-hidden">
-      <Hero />
+      <Hero onOpenProjects={() => open("projects")} />
 
       {active ? (
         <SectionCanvas

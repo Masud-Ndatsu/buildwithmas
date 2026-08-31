@@ -1,4 +1,10 @@
-import { currentFocus, engineering, profile, technology } from "@/lib/content";
+import {
+  currentFocus,
+  engineering,
+  profile,
+  projects,
+  technology,
+} from "@/lib/content";
 import { MediaFrame } from "../media-frame";
 import type { ReactNode } from "react";
 
@@ -17,6 +23,10 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 }
 
 export function AboutDocument() {
+  const shipped = projects.filter(
+    (project) => project.status === "live" && project.metrics?.length,
+  );
+
   return (
     <div className="max-w-[900px] pb-[clamp(32px,6vh,72px)]">
       {/* Intro — portrait beside the statement, stacked on a phone. */}
@@ -42,15 +52,40 @@ export function AboutDocument() {
         </div>
       </div>
 
+      {shipped.length ? (
+        <Row label="Shipped">
+          <ul className="flex flex-col">
+            {shipped.map((project, i) => (
+              <li
+                key={project.num}
+                className={`flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 ${
+                  i === 0 ? "pb-4" : "border-t border-border-darker py-4"
+                }`}
+              >
+                <span className="text-[clamp(16px,1.6vw,24px)] font-light tracking-[-0.015em]">
+                  {project.name}
+                </span>
+                <span className="font-mono text-[10px] tracking-[0.12em] text-text-accent uppercase">
+                  {project.metrics!.join("  ·  ")}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Row>
+      ) : null}
+
       <Row label="Engineering">
         <ul className="flex flex-col">
           {engineering.map((item, i) => (
             <li
               key={item}
-              className={`text-[clamp(15px,1.5vw,22px)] font-light tracking-[-0.01em] ${
+              className={`flex items-baseline gap-4 text-[clamp(15px,1.5vw,22px)] font-light tracking-[-0.01em] ${
                 i === 0 ? "pb-3" : "border-t border-border-darker py-3"
               }`}
             >
+              <span className="eyebrow-lg text-text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {item}
             </li>
           ))}

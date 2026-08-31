@@ -124,14 +124,21 @@ a:hover {
     }
   }
 
-  /* Project panels get the full canvas width minus gutters and nav reserve. */
+  /*
+   * Project cards: fixed-ish width so several sit side by side in the
+   * horizontal canvas (a carousel), capped to the visible column on a phone.
+   */
   .panel-project {
-    width: min(
-      1000px,
-      calc(100vw - 2 * var(--gutter-x) - var(--nav-reserve) - 20px)
-    );
+    width: min(400px, calc(100vw - 2 * var(--gutter-x) - var(--nav-reserve) - 20px));
     min-width: 280px;
-    padding-inline: clamp(20px, 3.4vw, 56px);
+    padding-inline: clamp(18px, 2.4vw, 30px);
+  }
+
+  /* Service cards: same carousel idiom as project cards, slightly wider to fit the item list. */
+  .panel-service {
+    width: min(420px, calc(100vw - 2 * var(--gutter-x) - var(--nav-reserve) - 20px));
+    min-width: 280px;
+    padding-inline: clamp(18px, 2.4vw, 30px);
   }
 }
 
@@ -322,8 +329,8 @@ img {
 /* ---- Service glyphs ----------------------------------------------------- */
 
 .glyph {
-  width: clamp(34px, 3vw, 44px);
-  height: clamp(34px, 3vw, 44px);
+  width: clamp(56px, 7vw, 84px);
+  height: clamp(56px, 7vw, 84px);
   flex: none;
 }
 

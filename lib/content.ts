@@ -22,8 +22,14 @@ export type Project = {
   num: string;
   name: string;
   descriptor: string;
+  /** One line, panel-visible: what made this non-trivial. Omit until written. */
+  constraint?: string;
   problem: string;
   solution: string;
+  /** Measurable, verifiable result. Omit rather than approximate. */
+  outcome?: string;
+  /** Short stat chips backing the outcome — real numbers only. */
+  metrics?: string[];
   arch: string[];
   stack: string[];
   /**
@@ -112,12 +118,17 @@ export const profile = {
 export const projects: Project[] = [
   {
     num: "01",
-    name: "Opportunity Platform",
+    name: "Ambitful",
     descriptor: "AI-powered opportunity discovery platform",
+    constraint:
+      "Scholarship, fellowship and grant listings go stale faster than manual curation can keep up, across hundreds of inconsistent sources.",
     problem:
       "Scholarships, fellowships, internships and grants are scattered across hundreds of inconsistent sources, and listings go stale faster than any team can curate them by hand.",
     solution:
-      "A sourcing pipeline crawls and queues candidate listings, an LLM extraction step normalises them into structured records, and a review workflow lets moderators approve or reject before anything reaches search.",
+      "Extraction runs on Gemini instead of hand-written scrapers per source, so adding a new opportunity site doesn't mean shipping new parsing code. But the model's output isn't trusted directly: every extracted record sits behind a moderator approval step before it reaches search, because a wrong deadline or funding amount is a worse failure than a slower publish.",
+    outcome:
+      "Live at ambitful.ai. The pipeline has sourced 1,000+ opportunities and produced 2,500+ generated applications, reclaiming an estimated 4,000+ hours of manual application work for users.",
+    metrics: ["1,000+ opportunities", "2,500+ applications", "4,000+ hrs reclaimed"],
     arch: [
       "Automated opportunity sourcing workers",
       "Gemini-assisted field extraction",
@@ -137,7 +148,10 @@ export const projects: Project[] = [
       "Cloudinary",
       "AWS",
     ],
-    status: "in-development",
+    status: "live",
+    liveUrl: "https://ambitful.ai",
+    links: [{ label: "Visit Ambitful", href: "https://ambitful.ai" }],
+    shot: { src: "/images/projects/ambitful-home.jpg", alt: "Ambitful homepage" },
   },
   {
     num: "02",
@@ -159,21 +173,29 @@ export const projects: Project[] = [
   },
   {
     num: "03",
-    name: "Collectiv",
-    descriptor: "Social commerce around published product collections",
+    name: "NebulaEngage",
+    descriptor: "Coaching marketplace connecting experts with career-seekers",
+    constraint:
+      "Coaches needed to publish programs and have clients discover, follow and book them — part marketplace, part social graph.",
     problem:
-      "Sellers wanted to publish curated collections and have customers discover, follow and share them, which sits between a marketplace and a social graph.",
+      "Coaches wanted to publish structured programs — mock interviews, mentorship tracks, career guidance — and have clients discover, follow and book them, which sits between a marketplace and a social graph rather than fitting cleanly into either.",
     solution:
-      "A marketplace catalogue with collection entities on top, social interactions modelled as their own write path, and read models shaped for discovery feeds.",
+      "Coach profiles and programs live in an ordinary marketplace catalogue, but follows and discovery activity run through a separate write path instead of being bolted onto the catalogue schema — so a spike in social activity can't degrade the booking and payment reads that actually make the platform money.",
+    outcome:
+      "Live at nebulaengage.com, connecting 30+ coaches from companies including Google, Meta, McKinsey and Goldman Sachs with 500+ users to date.",
+    metrics: ["30+ coaches", "10+ companies", "500+ users"],
     arch: [
       "Marketplace catalogue architecture",
-      "Collection management model",
-      "Social interaction write path",
-      "Business and customer relationships",
-      "Product discovery feeds",
+      "Program / collection management model",
+      "Follow & discovery write path",
+      "Coach-client relationships",
+      "Session booking and scheduling",
     ],
     stack: ["Node.js", "PostgreSQL", "Redis", "Cloud Infrastructure"],
-    status: "in-development",
+    status: "live",
+    liveUrl: "https://nebulaengage.com",
+    links: [{ label: "Visit NebulaEngage", href: "https://nebulaengage.com" }],
+    shot: { src: "/images/projects/nebulaengage-home.jpg", alt: "NebulaEngage homepage" },
   },
   {
     num: "04",

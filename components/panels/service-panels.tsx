@@ -8,26 +8,32 @@ export function ServicePanels() {
         <article
           key={service.num}
           data-panel
-          className="panel w-[min(40vw,520px)] min-w-[270px] px-[clamp(20px,2.6vw,44px)]"
+          className="panel panel-service self-start gap-[clamp(14px,2vh,22px)]"
         >
-          <div className="flex items-start justify-between gap-4">
-            <span className="eyebrow-lg text-text-accent">{service.num}</span>
+          {/* Same bordered-frame treatment as the project card's screenshot face. */}
+          <div className="flex aspect-[16/10] flex-none items-center justify-center border border-border-dark">
             {serviceGlyphs[service.num]}
           </div>
 
-          <h3 className="mt-[clamp(18px,3vh,40px)] max-w-[14ch] text-[clamp(24px,2.6vw,44px)] leading-[1.02] font-light tracking-[-0.025em]">
-            {service.title}
-          </h3>
+          <div className="flex items-start gap-3">
+            <span className="eyebrow-lg pt-[0.35em] text-text-accent">
+              {service.num}
+            </span>
+            <div>
+              <h3 className="text-[clamp(20px,2vw,28px)] leading-[1.05] font-light tracking-[-0.02em]">
+                {service.title}
+              </h3>
+              <p className="mt-2 max-w-[32ch] text-[13px] leading-[1.55] text-text-muted text-pretty">
+                {service.blurb}
+              </p>
+            </div>
+          </div>
 
-          <p className="mt-[18px] max-w-[34ch] text-[14px] leading-[1.65] text-text-muted text-pretty">
-            {service.blurb}
-          </p>
-
-          <ul className="mt-auto flex flex-col pt-[clamp(24px,4vh,48px)]">
+          <ul className="flex flex-col border-t border-border-darker">
             {service.items.map((item) => (
               <li
                 key={item}
-                className="border-t border-border-darker py-[13px] font-mono text-[11px] tracking-[0.12em] text-text-sand uppercase"
+                className="border-b border-border-darker py-[13px] font-mono text-[11px] tracking-[0.12em] text-text-sand uppercase"
               >
                 {item}
               </li>

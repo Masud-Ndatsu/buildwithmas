@@ -50,13 +50,40 @@ export function ProjectDetail({
     >
       <div className="flex flex-wrap gap-[clamp(20px,3vw,48px)]">
         <div className="flex-[1_1_280px] min-w-[220px]">
-          <p className="eyebrow mb-3.5 text-text-tertiary">Overview</p>
-          <p className="mb-3 text-[14px] leading-[1.7] text-text-sand text-pretty">
-            {project.problem}
-          </p>
-          <p className="text-[14px] leading-[1.7] text-text-muted text-pretty">
-            {project.solution}
-          </p>
+          <div>
+            <p className="eyebrow mb-3.5 text-text-tertiary">Constraint</p>
+            <p className="text-[14px] leading-[1.7] text-text-sand text-pretty">
+              {project.problem}
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <p className="eyebrow mb-3.5 text-text-tertiary">Decision</p>
+            <p className="text-[14px] leading-[1.7] text-text-sand text-pretty">
+              {project.solution}
+            </p>
+          </div>
+
+          {project.outcome ? (
+            <div className="mt-6">
+              <p className="eyebrow mb-3.5 text-text-tertiary">Outcome</p>
+              <p className="text-[14px] leading-[1.7] text-text-sand text-pretty">
+                {project.outcome}
+              </p>
+              {project.metrics?.length ? (
+                <ul className="mt-3.5 flex flex-wrap gap-1.5">
+                  {project.metrics.map((metric) => (
+                    <li
+                      key={metric}
+                      className="border border-border-dark px-2 py-[5px] font-mono text-[10px] tracking-[0.1em] text-text-accent uppercase"
+                    >
+                      {metric}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="flex-[1_1_220px] min-w-[200px]">

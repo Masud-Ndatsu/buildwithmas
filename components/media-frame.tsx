@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 type MediaFrameProps = {
-  src: string;
+  /** Omit when the asset doesn't exist yet — renders the placeholder directly. */
+  src?: string;
   alt: string;
   /** Shown in the frame when the file is not present yet. */
   placeholder: string;
@@ -49,7 +50,7 @@ export function MediaFrame({
         }`}
         style={ratio ? { aspectRatio: ratio } : undefined}
       >
-        {unavailable ? (
+        {!src || unavailable ? (
           <div className="eyebrow absolute inset-0 flex items-center justify-center px-4 text-center leading-[2] text-text-tertiary">
             {placeholder}
           </div>

@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { profile } from "@/lib/content";
 import { jobTitle, siteName, siteTitle } from "@/lib/site";
 
 export const alt = siteTitle;
@@ -26,7 +25,7 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0c0c0b",
+          background: "#faf8f4",
           padding: "64px 72px",
           fontFamily: "Geist",
         }}
@@ -37,7 +36,7 @@ export default async function Image() {
               fontSize: 24,
               fontWeight: 500,
               letterSpacing: "0.14em",
-              color: "#f2efe9",
+              color: "#1a1816",
             }}
           >
             {siteName.toUpperCase()}
@@ -48,7 +47,7 @@ export default async function Image() {
               fontFamily: "Geist Mono",
               fontSize: 15,
               letterSpacing: "0.16em",
-              color: "#8d887e",
+              color: "#6b665e",
             }}
           >
             {jobTitle.toUpperCase()}
@@ -56,7 +55,7 @@ export default async function Image() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ width: 64, height: 2, background: "#c98f3f" }} />
+          <div style={{ width: 64, height: 2, background: "#b4532f" }} />
           <div
             style={{
               display: "flex",
@@ -66,11 +65,11 @@ export default async function Image() {
               fontWeight: 300,
               letterSpacing: "-0.035em",
               lineHeight: 1.02,
-              color: "#f2efe9",
+              color: "#1a1816",
             }}
           >
-            <div style={{ display: "flex" }}>I build systems that</div>
-            <div style={{ display: "flex" }}>are designed to scale.</div>
+            <div style={{ display: "flex" }}>I turn ideas into</div>
+            <div style={{ display: "flex" }}>reliable digital products.</div>
           </div>
         </div>
 
@@ -84,10 +83,10 @@ export default async function Image() {
             letterSpacing: "0.14em",
           }}
         >
-          <div style={{ display: "flex", color: "#757067" }}>
-            {profile.disciplines.join(" · ").toUpperCase()}
+          <div style={{ display: "flex", color: "#6b665e" }}>
+            {["Products","Backend","AI"].join(" · ").toUpperCase()}
           </div>
-          <div style={{ display: "flex", color: "#4f4b45" }}>ABUJA, NG</div>
+          <div style={{ display: "flex", color: "#6b665e" }}>WORKING WORLDWIDE</div>
         </div>
       </div>
     ),

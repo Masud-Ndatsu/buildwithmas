@@ -10,23 +10,17 @@ export const siteUrl = (
 
 export const siteName = "Mas'ud Ndatsu";
 
-export const jobTitle = "Backend & Distributed Systems Engineer";
+export const jobTitle = "Software Engineer";
 
 export const siteTitle = `${siteName} — ${jobTitle}`;
 
 export const siteDescription =
-  "Mas'ud Ndatsu — Backend & Distributed Systems Engineer. Reliable backend systems, infrastructure and distributed applications.";
+  "Mas'ud Ndatsu is a software engineer building digital products, backend systems and AI-powered solutions for startups and businesses.";
 
 export const siteKeywords = [
+  "software engineer",
   "backend engineer",
-  "distributed systems",
-  "cloud infrastructure",
-  "DevOps",
-  "AI systems",
-  "Node.js",
-  "NestJS",
-  "PostgreSQL",
-  "Kubernetes",
-  "software engineer Abuja",
+  "AI solutions",
+  "digital products",
   "Mas'ud Ndatsu",
 ];

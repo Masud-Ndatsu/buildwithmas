@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import {
   siteDescription,
   siteKeywords,
@@ -7,6 +7,10 @@ import {
   siteTitle,
   siteUrl,
 } from "@/lib/site";
+import { profile } from "@/lib/content";
+import { jobTitle } from "@/lib/site";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,6 +20,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
@@ -32,8 +41,6 @@ export const metadata: Metadata = {
   creator: siteName,
   publisher: siteName,
   category: "technology",
-  // Every ?section= variant is the same document, so they all point here.
-  alternates: { canonical: "/" },
   openGraph: {
     type: "profile",
     firstName: "Mas'ud",
@@ -64,18 +71,38 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c0c0b",
-  colorScheme: "dark",
+  themeColor: "#faf8f4",
+  colorScheme: "light",
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteName,
+  url: siteUrl,
+  jobTitle,
+  description: siteDescription,
+  email: `mailto:${profile.email}`,
+  sameAs: [profile.github.href, profile.linkedin?.href].filter(Boolean),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased`}
     >
-      <body className="h-full overflow-hidden bg-background text-foreground">
-        {children}
+      <body className="flex min-h-screen flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          // Static content; `<` is escaped so the JSON cannot close the tag.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
+          }}
+        />
+        <SiteNav />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

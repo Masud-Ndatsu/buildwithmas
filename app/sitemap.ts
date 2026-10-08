@@ -1,17 +1,15 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/site";
 
-/**
- * One document. The `?section=` variants are the same page and canonicalise
- * back to `/`, so they are deliberately not listed.
- */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    {
-      url: `${siteUrl}/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+    { path: "", priority: 1 },
+    { path: "/work", priority: 0.8 },
+    { path: "/about", priority: 0.8 },
+  ].map(({ path, priority }) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority,
+  }));
 }

@@ -9,19 +9,20 @@ export default function Home() {
     <>
       <section className="relative isolate overflow-hidden border-b border-line">
         <Image
-          src="/images/passport.png"
+          src="/images/hero-network.svg"
           alt=""
+          unoptimized
           fill
           priority
           sizes="100vw"
-          className="-z-20 object-cover object-[50%_18%] lg:object-[85%_20%]"
+          className="-z-20 object-cover object-[70%_50%]"
         />
         {/* Scrim keeps the headline legible: top-down on phones, left-to-right on desktop. */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,var(--background)_0%,rgb(250_248_244/0.94)_45%,rgb(250_248_244/0.2)_100%)] lg:bg-[linear-gradient(90deg,var(--background)_0%,rgb(250_248_244/0.95)_42%,rgb(250_248_244/0.1)_80%)]"
         />
-        <div className="rise wrap py-20 pb-72 sm:py-32 sm:pb-80 lg:py-40 lg:pb-40">
+        <div className="rise wrap py-20 pb-72 sm:py-32 sm:pb-80 lg:py-28 lg:pb-28">
           <p className="label">Software engineer</p>
           <h1 className="display mt-6 max-w-[14ch] text-[clamp(48px,8vw,112px)]">
             {profile.headline}

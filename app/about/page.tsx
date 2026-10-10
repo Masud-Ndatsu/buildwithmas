@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactLinks } from "@/components/contact-links";
+import { pageMetadata } from "@/lib/seo";
 import { capabilities, experience, profile, projects } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Mas'ud Ndatsu is a software engineer working with startups and businesses.",
-  alternates: { canonical: "/about" },
-};
+    "Mas'ud Ndatsu (Masud Ndatsu) is a backend and AI engineer based in Abuja, Nigeria, working with startups and businesses worldwide.",
+  path: "/about",
+});
 
 const shipped = projects.filter((p) => p.metrics?.length);
 
@@ -19,8 +20,9 @@ export default function AboutPage() {
         <div>
           <h1 className="display text-[clamp(52px,9vw,120px)]">About</h1>
           <p className="display mt-8 max-w-[24ch] text-[clamp(24px,3.2vw,40px)]">
-            I&apos;m {profile.name}, a software engineer working with startups and
-            businesses.
+            I&apos;m {profile.name} (also written Masud Ndatsu), a backend and AI
+            engineer based in Abuja, Nigeria, working with startups and
+            businesses worldwide.
           </p>
           <div className="mt-8 flex max-w-[56ch] flex-col gap-5 text-lg leading-relaxed text-muted">
             <p>

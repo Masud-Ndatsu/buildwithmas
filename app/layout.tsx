@@ -2,12 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import {
   siteDescription,
-  siteKeywords,
+  siteLocation,
   siteName,
   siteTitle,
   siteUrl,
 } from "@/lib/site";
-import { profile } from "@/lib/content";
+import { experience, profile } from "@/lib/content";
 import { jobTitle } from "@/lib/site";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
@@ -36,7 +36,6 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteName,
-  keywords: siteKeywords,
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -79,11 +78,22 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: siteName,
+  alternateName: ["Masud Ndatsu", "Mas'ud"],
   url: siteUrl,
+  image: `${siteUrl}/images/passport.png`,
   jobTitle,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: siteLocation.split(", ")[0],
+    addressCountry: "NG",
+  },
+  worksFor: { "@type": "Organization", name: experience[0].org },
+  alumniOf: "Ahmadu Bello University",
   description: siteDescription,
   email: `mailto:${profile.email}`,
-  sameAs: [profile.github.href, profile.linkedin?.href].filter(Boolean),
+  sameAs: [profile.github, profile.linkedin, profile.x]
+    .filter(Boolean)
+    .map((p) => p!.href),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

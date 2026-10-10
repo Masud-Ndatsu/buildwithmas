@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Cta } from "@/components/cta";
 import { ProjectImage } from "@/components/project-image";
+import { pageMetadata } from "@/lib/seo";
 import { projects } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Work",
-  description: "A selection of products and systems Mas'ud Ndatsu has helped build.",
-  alternates: { canonical: "/work" },
-};
+  description:
+    "Case studies of the products and backend systems Mas'ud Ndatsu has helped build, from AI platforms to payments infrastructure.",
+  path: "/work",
+});
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -38,7 +41,11 @@ export default function WorkPage() {
             <p className="label">
               {String(i + 1).padStart(2, "0")} · {p.category}
             </p>
-            <h2 className="display mt-4 text-[clamp(40px,6vw,80px)]">{p.name}</h2>
+            <h2 className="display mt-4 text-[clamp(40px,6vw,80px)]">
+              <Link href={`/work/${p.slug}`} className="hover:text-accent">
+                {p.name}
+              </Link>
+            </h2>
             <p className="mt-5 max-w-[40ch] text-xl text-muted">{p.tagline}</p>
 
             <div className="mt-10">
@@ -73,12 +80,15 @@ export default function WorkPage() {
               </Block>
             </div>
 
+            <Link href={`/work/${p.slug}`} className="btn btn-solid mt-10">
+              Read case study →
+            </Link>
             {p.liveUrl ? (
               <a
                 href={p.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-ghost mt-10"
+                className="btn btn-ghost mt-10 ml-3"
               >
                 Visit live project ↗
               </a>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { siteName } from "@/lib/site";
+const brandName = "BuildWithMas";
 
 const links = [
   { href: "/work", label: "Work" },
@@ -21,9 +21,10 @@ export function SiteNav() {
         <Link
           href="/"
           onClick={close}
-          className="text-[13px] font-medium tracking-[0.14em] uppercase"
+          aria-label={`${brandName} — home`}
+          className="logo"
         >
-          {siteName}
+          <span aria-hidden>{brandName}</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 sm:flex">

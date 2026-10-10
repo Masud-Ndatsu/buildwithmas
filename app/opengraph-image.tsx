@@ -68,8 +68,8 @@ export default async function Image() {
               color: "#1a1816",
             }}
           >
-            <div style={{ display: "flex" }}>I turn ideas into</div>
-            <div style={{ display: "flex" }}>reliable digital products.</div>
+            <div style={{ display: "flex" }}>I build the software behind</div>
+            <div style={{ display: "flex" }}>ambitious ideas.</div>
           </div>
         </div>
 

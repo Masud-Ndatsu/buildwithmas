@@ -10,17 +10,11 @@ export const siteUrl = (
 
 export const siteName = "Mas'ud Ndatsu";
 
-export const jobTitle = "Software Engineer";
+export const jobTitle = "Backend & AI Engineer";
 
 export const siteTitle = `${siteName} — ${jobTitle}`;
 
-export const siteDescription =
-  "Mas'ud Ndatsu is a software engineer building digital products, backend systems and AI-powered solutions for startups and businesses.";
+export const siteLocation = "Abuja, Nigeria";
 
-export const siteKeywords = [
-  "software engineer",
-  "backend engineer",
-  "AI solutions",
-  "digital products",
-  "Mas'ud Ndatsu",
-];
+export const siteDescription =
+  "Mas'ud Ndatsu (Masud Ndatsu) is a backend and AI engineer based in Abuja, Nigeria, building digital products, backend systems and AI-powered solutions for startups and businesses worldwide.";

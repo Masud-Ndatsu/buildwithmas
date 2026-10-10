@@ -102,6 +102,17 @@ body {
     color: var(--accent);
   }
 
+  /* Wordmark. */
+  .logo {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--foreground);
+  }
+
   /* Image that rises into place and eases in on hover. */
   .shot img {
     transition: transform 700ms var(--ease-out);

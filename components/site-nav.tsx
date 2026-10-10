@@ -38,7 +38,7 @@ export function SiteNav() {
               {l.label}
             </Link>
           ))}
-          <Link href="/about#contact" className="btn btn-solid !px-4 !py-2 !text-[13px] tracking-[0.1em] uppercase">
+          <Link href="/contact" className="btn btn-solid !px-4 !py-2 !text-[13px] tracking-[0.1em] uppercase">
             Let&apos;s talk
           </Link>
         </nav>
@@ -60,7 +60,7 @@ export function SiteNav() {
           aria-label="Primary"
           className="wrap flex flex-col border-t border-line pb-4 sm:hidden"
         >
-          {[...links, { href: "/about#contact", label: "Let's talk" }].map((l) => (
+          {[...links, { href: "/contact", label: "Let's talk" }].map((l) => (
             <Link
               key={l.href}
               href={l.href}

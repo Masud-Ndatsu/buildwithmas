@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Cta } from "@/components/cta";
 import { ProjectImage } from "@/components/project-image";
-import { profile, projects } from "@/lib/content";
+import { projects } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { siteName, siteUrl } from "@/lib/site";
 
@@ -141,9 +141,9 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
               Visit live project ↗
             </a>
           ) : null}
-          <a href={`mailto:${profile.email}`} className="btn btn-ghost">
+          <Link href="/contact" className="btn btn-ghost">
             Discuss a similar project
-          </a>
+          </Link>
         </div>
       </article>
       <Cta />

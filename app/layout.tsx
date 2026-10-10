@@ -9,6 +9,7 @@ import {
 } from "@/lib/site";
 import { experience, profile } from "@/lib/content";
 import { jobTitle } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteNav } from "@/components/site-nav";
 import "./globals.css";
@@ -113,6 +114,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteNav />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

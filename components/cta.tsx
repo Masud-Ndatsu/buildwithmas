@@ -13,7 +13,7 @@ export function Cta() {
           the technical approach, and what it takes to get it built.
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href="/about#contact" className="btn btn-solid">
+          <Link href="/contact" className="btn btn-solid">
             Let&apos;s talk →
           </Link>
           <a href={`mailto:${profile.email}`} className="link-line">

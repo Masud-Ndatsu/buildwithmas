@@ -37,7 +37,7 @@ export default function Home() {
             <Link href="/work" className="btn btn-solid">
               View my work
             </Link>
-            <Link href="/about#contact" className="btn btn-ghost">
+            <Link href="/contact" className="btn btn-ghost">
               Let&apos;s talk
             </Link>
           </div>

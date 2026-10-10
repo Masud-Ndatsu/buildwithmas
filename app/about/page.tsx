@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
 import { pageMetadata } from "@/lib/seo";
 import { capabilities, experience, profile, projects } from "@/lib/content";
@@ -121,9 +122,9 @@ export default function AboutPage() {
           <p className="mt-6 max-w-[34ch] text-xl text-muted">
             Have an idea, product or technical problem you want to discuss?
           </p>
-          <a href={`mailto:${profile.email}`} className="btn btn-solid mt-10">
-            Email me
-          </a>
+          <Link href="/contact" className="btn btn-solid mt-10">
+            Start a conversation
+          </Link>
           <div className="mt-14">
             <ContactLinks />
           </div>

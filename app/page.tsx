@@ -88,7 +88,7 @@ export default function Home() {
           <ul className="mt-14 flex flex-col gap-20">
             {featuredProjects.map((p) => (
               <li key={p.slug}>
-                <Link href={`/work#${p.slug}`} className="group block">
+                <Link href={`/work/${p.slug}`} className="group block">
                   <ProjectImage project={p} />
                   <div className="mt-6 grid gap-x-12 gap-y-3 md:grid-cols-[1fr_1.2fr]">
                     <div>
@@ -104,7 +104,7 @@ export default function Home() {
                         {p.role}
                       </p>
                       <p className="mt-4 text-sm font-medium">
-                        View project →
+                        View case study →
                       </p>
                     </div>
                   </div>

@@ -14,6 +14,8 @@ export type Project = {
   technology: string[];
   liveUrl?: string;
   image?: { src: string; alt: string };
+  /** Optional architecture diagram, shown on the case-study page. */
+  diagram?: { src: string; alt: string };
   /** Long-form case study, shown only on the project's own page. */
   details?: {
     overview: string;
@@ -28,11 +30,25 @@ export const profile = {
   intro:
     "I help startups and businesses turn ideas into reliable digital products, backend systems, and AI-powered experiences.",
   email: "masudndatsu@gmail.com",
-  github: { label: "GitHub", href: "https://github.com/Masud-Ndatsu" },
+  github: {
+    label: "GitHub",
+    href: "https://github.com/Masud-Ndatsu",
+  } as { label: string; href: string; todo?: boolean },
   // The handle from the earlier design was wrong. Add the real one and it
   // appears everywhere links are listed.
-  linkedin: null as { label: string; href: string } | null,
-  x: null as { label: string; href: string } | null,
+  // TODO: replace both placeholders with the real profile URLs and remove
+  // `todo: true`. Placeholders render in the footer but are kept out of the
+  // JSON-LD `sameAs` list.
+  linkedin: {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/TODO",
+    todo: true,
+  } as { label: string; href: string; todo?: boolean },
+  x: { label: "X", href: "https://x.com/TODO", todo: true } as {
+    label: string;
+    href: string;
+    todo?: boolean;
+  },
 };
 
 export const channels = [
@@ -228,7 +244,7 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "user-management",
+    slug: "user-management-system",
     name: "User Management System",
     tagline:
       "Shared sign-in and account infrastructure that several products can rely on.",
@@ -244,6 +260,7 @@ export const projects: Project[] = [
 
 export const featuredProjects = projects.slice(0, 3);
 
+// TODO: add earlier roles here; each entry renders on the About page.
 export const experience = [
   {
     period: "2024 — Present",

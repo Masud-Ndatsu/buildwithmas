@@ -92,8 +92,8 @@ const personSchema = {
   description: siteDescription,
   email: `mailto:${profile.email}`,
   sameAs: [profile.github, profile.linkedin, profile.x]
-    .filter(Boolean)
-    .map((p) => p!.href),
+    .filter((p) => !p.todo)
+    .map((p) => p.href),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

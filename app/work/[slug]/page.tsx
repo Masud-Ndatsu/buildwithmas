@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Cta } from "@/components/cta";
@@ -41,14 +42,16 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   const url = `${siteUrl}/work/${p.slug}`;
   const schema = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: `${p.name} case study`,
-    headline: `${p.name}: ${p.tagline}`,
+    "@type": "Article",
+    headline: `${p.name} case study`,
+    mainEntityOfPage: url,
+    inLanguage: "en",
     description: p.result,
     url,
     ...(p.image ? { image: `${siteUrl}${p.image.src}` } : {}),
     keywords: p.technology.join(", "),
     author: { "@type": "Person", name: siteName, url: siteUrl },
+    publisher: { "@type": "Person", name: siteName, url: siteUrl },
     ...(p.liveUrl ? { sameAs: [p.liveUrl] } : {}),
   };
 
@@ -96,6 +99,20 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
             </p>
           </Section>
         </div>
+
+        {p.diagram ? (
+          <figure className="mt-16">
+            <Image
+              src={p.diagram.src}
+              alt={p.diagram.alt}
+              width={1600}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 1100px"
+              className="h-auto w-full rounded-xl border border-line"
+            />
+            <figcaption className="mt-3 text-sm text-muted">Architecture</figcaption>
+          </figure>
+        ) : null}
 
         {p.details ? (
           <div className="mt-16 flex flex-col gap-12">

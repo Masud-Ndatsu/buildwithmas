@@ -7,6 +7,7 @@ const brandName = "BuildWithMas";
 
 const links = [
   { href: "/work", label: "Work" },
+  { href: "/writing", label: "Writing" },
   { href: "/about", label: "About" },
 ];
 
